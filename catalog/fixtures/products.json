@@ -1,0 +1,5 @@
+[
+  {"model": "catalog.product", "pk": 1, "fields": {"name": "Смартфон", "description": "Новый смартфон", "category": 1, "price": "1000.00"}},
+  {"model": "catalog.product", "pk": 2, "fields": {"name": "Ноутбук", "description": "Игровой ноутбук", "category": 1, "price": "2000.00"}},
+  {"model": "catalog.product", "pk": 3, "fields": {"name": "Роман", "description": "Интересный роман", "category": 2, "price": "15.00"}}
+]
