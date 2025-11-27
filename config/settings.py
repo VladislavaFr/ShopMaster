@@ -1,23 +1,14 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
-# Загружаем переменные окружения из файла .env
-load_dotenv()
-
-# Базовая директория проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Секретный ключ
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-1234567890')
+SECRET_KEY = 'django-insecure-ваш-секретный-ключ'
 
-# Режим отладки
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = True
 
-# Разрешенные хосты
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-# Установленные приложения
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,11 +16,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'catalog',  # твое приложение
+    'catalog',
+    'blog',
 ]
 
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -40,10 +30,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Корень URL
 ROOT_URLCONF = 'config.urls'
 
-# Шаблоны
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -60,22 +48,15 @@ TEMPLATES = [
     },
 ]
 
-# WSGI
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Настройки базы данных PostgreSQL
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'ShopMaster'),      # имя базы
-        'USER': os.getenv('DB_USER', 'postgres'),        # пользователь
-        'PASSWORD': os.getenv('DB_PASSWORD', '123456'),  # пароль
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-# Валидация пароля
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -83,19 +64,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Язык и часовой пояс
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Статика
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
-# Медиафайлы
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Поле по умолчанию для моделей
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
