@@ -3,41 +3,21 @@
 {% block title %}Главная - ShopMaster{% endblock %}
 
 {% block content %}
-<h1>Добро пожаловать в ShopMaster!</h1>
-<p>Список товаров:</p>
+<h1>Добро пожаловать в ShopMaster</h1>
+<p>Это главная страница каталога.</p>
 <div class="row">
-    {% for product in page_obj %}
-    <div class="col-md-4 mb-3">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
         <div class="card">
             {% if product.image %}
             <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
             {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
-                <p class="card-text"><strong>Цена:</strong> {{ product.price }}₽</p>
-                <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">Подробнее</a>
+                <p class="card-text">{{ product.description|truncatewords:20 }}</p>
             </div>
         </div>
     </div>
-    {% empty %}
-    <p>Товары отсутствуют.</p>
     {% endfor %}
 </div>
-
-<nav aria-label="Page navigation">
-  <ul class="pagination">
-    {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
-      </li>
-    {% endif %}
-    <li class="page-item disabled"><span class="page-link">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span></li>
-    {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперёд</a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
 {% endblock %}

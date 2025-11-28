@@ -1,14 +1,13 @@
 {% extends 'catalog/base.html' %}
 
-{% block title %}{{ product.name }} - ShopMaster{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
 <h1>{{ product.name }}</h1>
 {% if product.image %}
-<img src="{{ product.image.url }}" class="img-fluid mb-3" alt="{{ product.name }}">
+<img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
 {% endif %}
-<p><strong>Описание:</strong> {{ product.description }}</p>
-<p><strong>Цена:</strong> {{ product.price }}₽</p>
-<p><strong>Категория:</strong> {{ product.category.name }}</p>
-<a href="{% url 'home' %}" class="btn btn-secondary">Назад на главную</a>
+<p>{{ product.description }}</p>
+<p>Цена: {{ product.price }} ₽</p>
+<a href="{% url 'home' %}">Вернуться</a>
 {% endblock %}
